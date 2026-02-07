@@ -215,5 +215,8 @@ form.addEventListener("submit", (e) => {
   // Save to local storage
   localStorage.setItem("Create Account", JSON.stringify(createAccount));
 
+  // Open login page
+  window.location.href = "welcome.html";
+
   form.reset();
 });
