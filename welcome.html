@@ -21,7 +21,7 @@
           <p>Log in to your account to continue.</p>
         </div>
 
-        <form>
+        <form id="form">
           <div class="form-group">
             <label for="email">Email</label>
             <input
@@ -30,6 +30,7 @@
               placeholder="e.g peter@gmail.com"
               autocomplete="email"
             />
+            <div class="errorMessage" id="emailErrorMessage"></div>
           </div>
 
           <div class="form-group">
@@ -40,9 +41,12 @@
               placeholder="Create a Password"
               autocomplete="current-password"
             />
+            <div class="errorMessage" id="passwordErrorMessage"></div>
           </div>
 
-          <button type="submit" class="submit-btn" disabled>Login</button>
+          <button type="submit" class="submit-btn" id="submitBtn" disabled>
+            Login
+          </button>
         </form>
 
         <div class="footer">
@@ -52,5 +56,6 @@
         </div>
       </div>
     </div>
+    <script src="./welcome.js"></script>
   </body>
 </html>
