@@ -180,7 +180,7 @@ function checkFormValidity() {
   const isConfirmValid = confirmPasswordValidation(password, confirmPassword);
 
   if (isNameValid && isEmailValid && isPasswordValid && isConfirmValid) {
-    submitBtn.disabled = false;
+    return (submitBtn.disabled = false);
   }
 
   return true;
