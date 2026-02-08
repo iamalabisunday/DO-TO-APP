@@ -11,7 +11,7 @@ const form = document.getElementById("form");
 const users = JSON.parse(localStorage.getItem("Create Account")) || [];
 
 /////////////////////////////////////
-// Login Validation
+// Email Validation
 /////////////////////////////////////
 function emailLoginValidation() {
   const emailValue = email.value.trim();
@@ -32,6 +32,9 @@ function emailLoginValidation() {
   return true;
 }
 
+/////////////////////////////////////
+// Password Validation
+/////////////////////////////////////
 function passwordLoginValidation() {
   const passwordValue = password.value.trim();
 
