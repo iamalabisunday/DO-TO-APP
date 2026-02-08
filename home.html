@@ -15,15 +15,18 @@
 
   <body>
     <!-- Checkbox Hacks for Modals -->
-    <input type="checkbox" id="new-task-toggle" class="modal-toggle" />
-    <input type="checkbox" id="edit-task-toggle" class="modal-toggle" />
+    <!-- <input type="checkbox" id="new-task-toggle" class="modal-toggle" />
+    <input type="checkbox" id="edit-task-toggle" class="modal-toggle" /> -->
 
     <div class="container task-container">
       <!-- Main Content -->
       <div class="task-card">
         <div class="task-header">
           <h1>Task Flow</h1>
-          <p>Welcome <span class="highlight-text">Sunday</span></p>
+          <p>
+            Welcome
+            <span id="highlight-name" class="highlight-text"></span>
+          </p>
         </div>
 
         <div class="action-bar">
@@ -415,5 +418,8 @@ Learning and Mastering CSS</textarea
         </form>
       </div>
     </div>
+
+    <!-- JAVASCRIPT -->
+    <script src="home.js"></script>
   </body>
 </html>
