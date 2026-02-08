@@ -13,31 +13,40 @@ const users = JSON.parse(localStorage.getItem("Create Account")) || [];
 /////////////////////////////////////
 // Login Validation
 /////////////////////////////////////
-function loginValidation() {
+function emailLoginValidation() {
   const emailValue = email.value.trim();
-  const passwordValue = password.value.trim();
 
   if (!emailValue) {
     emailErrorMessage.textContent = "Enter your email";
     return false;
   }
 
+  const matchedUser = users.find((user) => user.email === emailValue);
+
+  if (!matchedUser) {
+    emailErrorMessage.textContent = "Invalid email";
+    return false;
+  }
+
+  emailErrorMessage.textContent = "";
+  return true;
+}
+
+function passwordLoginValidation() {
+  const passwordValue = password.value.trim();
+
   if (!passwordValue) {
     passwordErrorMessage.textContent = "Enter your password";
     return false;
   }
 
-  const matchedUser = users.find(
-    (user) => user.email === emailValue && user.password === passwordValue,
-  );
+  const matchedUser = users.find((user) => user.password === passwordValue);
 
   if (!matchedUser) {
-    emailErrorMessage.textContent = "Invalid email";
     passwordErrorMessage.textContent = "Invalid password";
     return false;
   }
 
-  emailErrorMessage.textContent = "";
   passwordErrorMessage.textContent = "";
   return true;
 }
@@ -46,7 +55,7 @@ function loginValidation() {
 // Enable Button
 /////////////////////////////////
 function enableButton() {
-  submitBtn.disabled = !loginValidation();
+  submitBtn.disabled = !(emailLoginValidation() && passwordLoginValidation());
   return true;
 }
 
@@ -62,8 +71,5 @@ password.addEventListener("input", enableButton);
 form.addEventListener("submit", (e) => {
   e.preventDefault();
 
-  // if (loginValidation()) {
-  //   return true;
-  // }
   return (window.location.href = "home.html");
 });
