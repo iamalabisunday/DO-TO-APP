@@ -1,85 +1,66 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Create An Account</title>
-    <link rel="stylesheet" href="styles.css" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
-  </head>
 
-  <body>
-    <div class="container">
-      <div class="card">
-        <div class="header">
-          <h1>Create An Account</h1>
-          <p>Let's quickly set up your profile</p>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Create An Account</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="createAccount.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+    rel="stylesheet" />
+</head>
+
+<body>
+  <div class="container">
+    <div class="card">
+      <div class="header">
+        <h1>Create An Account</h1>
+        <p>Let's quickly set up your profile</p>
+      </div>
+
+      <form id="form">
+        <!-- Name Section -->
+        <div class="form-group">
+          <label for="name">Full Name</label>
+          <input type="text" id="name" placeholder="Full Name" autocomplete="name" />
+          <div class="errorMessage" id="nameErrorMessage"></div>
         </div>
 
-        <form id="form">
-          <!-- Name Section -->
-          <div class="form-group">
-            <label for="name">Full Name</label>
-            <input
-              type="text"
-              id="name"
-              placeholder="Full Name"
-              autocomplete="name"
-            />
-            <div class="errorMessage" id="nameErrorMessage"></div>
-          </div>
-
-          <!-- Email Section -->
-          <div class="form-group">
-            <label for="email">Email</label>
-            <input
-              type="email"
-              id="email"
-              placeholder="e.g peter@gmail.com"
-              autocomplete="email"
-            />
-            <div class="errorMessage" id="emailErrorMessage"></div>
-          </div>
-
-          <!-- Password Section -->
-          <div class="form-group">
-            <label for="password">Password</label>
-            <input
-              type="password"
-              id="password"
-              placeholder="Create a Password"
-              autocomplete="new-password"
-            />
-            <div class="errorMessage" id="passwordErrorMessage"></div>
-          </div>
-
-          <!-- Confirm Password -->
-          <div class="form-group">
-            <label for="confirm-password">Confirm Password</label>
-            <input
-              type="password"
-              id="confirm-password"
-              placeholder="Confirm Password"
-              autocomplete="new-password"
-            />
-            <div class="errorMessage" id="confirmPasswordErrorMessage"></div>
-          </div>
-
-          <button type="submit" class="submit-btn" id="submitBtn" disabled>
-            Create Account
-          </button>
-        </form>
-
-        <div class="footer">
-          <p>Already have an account? <a href="./welcome.html">Login In</a></p>
+        <!-- Email Section -->
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" placeholder="e.g peter@gmail.com" autocomplete="email" />
+          <div class="errorMessage" id="emailErrorMessage"></div>
         </div>
+
+        <!-- Password Section -->
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" placeholder="Create a Password" autocomplete="new-password" />
+          <div class="errorMessage" id="passwordErrorMessage"></div>
+        </div>
+
+        <!-- Confirm Password -->
+        <div class="form-group">
+          <label for="confirm-password">Confirm Password</label>
+          <input type="password" id="confirm-password" placeholder="Confirm Password" autocomplete="new-password" />
+          <div class="errorMessage" id="confirmPasswordErrorMessage"></div>
+        </div>
+
+        <button type="submit" class="submit-btn" id="submitBtn" disabled>
+          Create Account
+        </button>
+      </form>
+
+      <div class="footer">
+        <p>Already have an account? <a href="./welcome.html">Login In</a></p>
       </div>
     </div>
-    <script src="createAccount.js"></script>
-  </body>
+  </div>
+  <script src="createAccount.js"></script>
+</body>
+
 </html>

@@ -1,61 +1,52 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Welcome Back</title>
-    <link rel="stylesheet" href="styles.css" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
-  </head>
 
-  <body>
-    <div class="container">
-      <div class="card">
-        <div class="header">
-          <h1>Welcome back</h1>
-          <p>Log in to your account to continue.</p>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Welcome Back</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="welcome.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+    rel="stylesheet" />
+</head>
+
+<body>
+  <div class="container">
+    <div class="card">
+      <div class="header">
+        <h1>Welcome back</h1>
+        <p>Log in to your account to continue.</p>
+      </div>
+
+      <form id="form">
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" placeholder="e.g peter@gmail.com" autocomplete="email" />
+          <div class="errorMessage" id="emailErrorMessage"></div>
         </div>
 
-        <form id="form">
-          <div class="form-group">
-            <label for="email">Email</label>
-            <input
-              type="email"
-              id="email"
-              placeholder="e.g peter@gmail.com"
-              autocomplete="email"
-            />
-            <div class="errorMessage" id="emailErrorMessage"></div>
-          </div>
-
-          <div class="form-group">
-            <label for="password">Password</label>
-            <input
-              type="password"
-              id="password"
-              placeholder="Create a Password"
-              autocomplete="current-password"
-            />
-            <div class="errorMessage" id="passwordErrorMessage"></div>
-          </div>
-
-          <button type="submit" class="submit-btn" id="submitBtn" disabled>
-            Login
-          </button>
-        </form>
-
-        <div class="footer">
-          <p>
-            Don't have an account? <a href="./createAccount.html">Sign In</a>
-          </p>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" placeholder="Create a Password" autocomplete="current-password" />
+          <div class="errorMessage" id="passwordErrorMessage"></div>
         </div>
+
+        <button type="submit" class="submit-btn" id="submitBtn" disabled>
+          Login
+        </button>
+      </form>
+
+      <div class="footer">
+        <p>
+          Don't have an account? <a href="./createAccount.html">Sign In</a>
+        </p>
       </div>
     </div>
-    <script src="./welcome.js"></script>
-  </body>
+  </div>
+  <script src="./welcome.js"></script>
+</body>
+
 </html>
