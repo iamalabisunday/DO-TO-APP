@@ -26,6 +26,7 @@
           </p>
         </div>
 
+        <!-- Search and Task button Section -->
         <div class="action-bar">
           <div class="search-wrapper">
             <!-- Search Icon SVG -->
@@ -49,6 +50,7 @@
           <button class="btn-primary task-btn" id="taskBtn">Task</button>
         </div>
 
+        <!-- Task Section -->
         <div class="task-list">
           <!-- Task Item 1 -->
           <div class="task-item">
@@ -74,7 +76,8 @@
               </div>
             </div>
             <div class="task-actions">
-              <label for="edit-task-toggle" class="action-icon edit-icon">
+              <!-- Edit Icon Section -->
+              <div class="action-icon edit-icon" id="editIcon">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="18"
@@ -93,8 +96,9 @@
                     d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"
                   ></path>
                 </svg>
-              </label>
-              <button class="action-icon delete-icon">
+              </div>
+              <!-- Dalete Icon Section -->
+              <div class="action-icon delete-icon">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   width="18"
@@ -113,7 +117,7 @@
                   <line x1="10" y1="11" x2="10" y2="17"></line>
                   <line x1="14" y1="11" x2="14" y2="17"></line>
                 </svg>
-              </button>
+              </div>
             </div>
           </div>
         </div>
@@ -160,7 +164,9 @@
             ></textarea>
           </div>
           <div class="modal-actions">
-            <label for="new-task-toggle" class="btn-cancel">Cancel</label>
+            <!-- Clear button -->
+            <button class="btn-cancel">Cancel</button>
+            <!-- Submit button -->
             <button type="submit" class="submit-btn full-width">Add</button>
           </div>
         </form>
@@ -168,11 +174,12 @@
     </div>
 
     <!-- EDIT TASK MODAL -->
-    <div class="modal-overlay edit-task-modal">
+    <div class="modal-overlay edit-task-modal" id="edit-task-modal">
       <div class="card modal-card">
         <div class="modal-header">
           <h2>Edit Task</h2>
-          <label for="edit-task-toggle" class="close-btn">
+          <!-- cancel Icon -->
+          <div class="close-btn" id="closeBtn">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="24"
@@ -187,7 +194,7 @@
               <line x1="18" y1="6" x2="6" y2="18"></line>
               <line x1="6" y1="6" x2="18" y2="18"></line>
             </svg>
-          </label>
+          </div>
         </div>
         <form>
           <div class="form-group">

@@ -15,12 +15,14 @@ window.addEventListener("DOMContentLoaded", () => {
 });
 
 /////////////////////////////////////
-// Opena Task
+// New Task - Open and close New Task Modal
 /////////////////////////////////////
 const taskBtn = document.getElementById("taskBtn");
 const newTaskToggle = document.getElementById("new-task-toggle");
+const closeNewTask = document.getElementById("close-new-task");
 
 taskBtn.addEventListener("click", openTaskModal);
+closeNewTask.addEventListener("click", openTaskModal);
 
 function openTaskModal() {
   if (newTaskToggle.classList.contains("modal-toggle")) {
@@ -32,17 +34,20 @@ function openTaskModal() {
 }
 
 /////////////////////////////////////
-// close New Task Modal
+// Edit Task - Open and close New Task Modal
 /////////////////////////////////////
-const closeNewTask = document.getElementById("close-new-task");
+const editIcon = document.getElementById("editIcon");
+const editTaskModal = document.getElementById("edit-task-modal");
+const closeBtn = document.getElementById("closeBtn");
 
-newTaskToggle.addEventListener("click", closeTaskModal);
+editIcon.addEventListener("click", openEditModal);
+closeBtn.addEventListener("click", openEditModal);
 
-function closeTaskModal() {
-  if (closeNewTask.classList.contains("new-task-modal")) {
-    closeNewTask.classList.remove("new-task-modal");
+function openEditModal() {
+  if (editTaskModal.classList.contains("modal-toggle")) {
+    editTaskModal.classList.remove("modal-toggle");
     return false;
   }
-  closeNewTask.classList.add("new-task-modal");
+  editTaskModal.classList.add("modal-toggle");
   return true;
 }
