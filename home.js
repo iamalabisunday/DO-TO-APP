@@ -34,6 +34,65 @@ function openTaskModal() {
 }
 
 /////////////////////////////////////
+// New Task Modal Form
+/////////////////////////////////////
+const newTitle = document.getElementById("new-title");
+const newDesc = document.getElementById("new-desc");
+const addNewBtn = document.getElementById("addNewBtn");
+const form = document.getElementById("newForm");
+
+form.addEventListener("submit", newTaskValue);
+
+let newTaskDatas = [];
+
+function newTaskValue(e) {
+  e.preventDefault();
+
+  const title = newTitle.value.trim();
+  const desc = newDesc.value.trim();
+
+  const newTaskData = {
+    title,
+    desc,
+  };
+
+  newTaskDatas.push(newTaskData);
+
+  localStorage.setItem("taskValue", JSON.stringify(newTaskDatas));
+
+  form.reset();
+  openTaskModal();
+}
+
+// Disable Btn
+function disableNewBtn() {
+  const title = newTitle.value.trim();
+  const desc = newDesc.value.trim();
+
+  if (!(title && desc)) {
+    addNewBtn.disabled = true;
+  } else {
+    addNewBtn.disabled = false;
+  }
+}
+
+// Even Listener
+newTitle.addEventListener("input", disableNewBtn);
+newDesc.addEventListener("input", disableNewBtn);
+
+/////////////////////////////////////
+// clear New Task Modal Form
+/////////////////////////////////////
+const cancelNewBtn = document.getElementById("cancelNewBtn");
+
+cancelNewBtn.addEventListener("click", clearTaskValue);
+
+function clearTaskValue(e) {
+  e.preventDefault();
+  form.reset();
+}
+
+/////////////////////////////////////
 // Edit Task - Open and close New Task Modal
 /////////////////////////////////////
 const editIcon = document.getElementById("editIcon");

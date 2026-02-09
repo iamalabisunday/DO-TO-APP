@@ -146,7 +146,7 @@
             </svg>
           </label>
         </div>
-        <form>
+        <form id="newForm">
           <div class="form-group">
             <label for="new-title">Title</label>
             <input
@@ -165,9 +165,16 @@
           </div>
           <div class="modal-actions">
             <!-- Clear button -->
-            <button class="btn-cancel">Cancel</button>
+            <button class="btn-cancel" id="cancelNewBtn">Cancel</button>
             <!-- Submit button -->
-            <button type="submit" class="submit-btn full-width">Add</button>
+            <button
+              type="submit"
+              class="submit-btn full-width"
+              id="addNewBtn"
+              disabled
+            >
+              Add
+            </button>
           </div>
         </form>
       </div>
