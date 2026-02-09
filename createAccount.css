@@ -1,3 +1,163 @@
+:root {
+    --bg-color: #0b0f19;
+    --card-bg: #111827;
+    --input-bg: #0f172a;
+    --input-border: #1f2937;
+    --primary-color: #f97316;
+    --text-primary: #f9fafb;
+    --text-secondary: #9ca3af;
+    --text-placeholder: #4b5563;
+    --font-family: "Plus Jakarta Sans", sans-serif;
+    --danger-color: #ef4444;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-family);
+    background-color: var(--bg-color);
+    color: var(--text-primary);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+}
+
+.container {
+    width: 100%;
+    max-width: 480px;
+}
+
+.card {
+    background-color: var(--card-bg);
+    padding: 2.5rem;
+    border-radius: 12px;
+    box-shadow:
+        0 4px 6px -1px rgba(0, 0, 0, 0.1),
+        0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.header,
+.task-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.header h1,
+.task-header h1 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: var(--text-primary);
+}
+
+.header p,
+.task-header p {
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+}
+
+.highlight-text {
+    color: var(--primary-color);
+    font-weight: 600;
+}
+
+/* Form Styles */
+.form-group {
+    margin-bottom: 1.25rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    font-size: 0.875rem;
+    color: var(--text-primary);
+}
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 0.875rem 1rem;
+    background-color: var(--input-bg);
+    border: 1px solid var(--input-border);
+    border-radius: 6px;
+    color: var(--text-primary);
+    font-family: inherit;
+    font-size: 0.875rem;
+    transition:
+        border-color 0.2s,
+        box-shadow 0.2s;
+    resize: none;
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+    color: var(--text-placeholder);
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 2px rgba(249, 115, 22, 0.1);
+}
+
+.errorMessage {
+    color: var(--danger-color);
+    font-size: 0.7rem;
+    margin-top: 0.25rem;
+}
+
+.submit-btn {
+    width: 100%;
+    padding: 0.875rem;
+    margin-top: 1rem;
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 0.9375rem;
+    cursor: pointer;
+    transition:
+        background-color 0.2s,
+        transform 0.1s;
+    text-align: center;
+    display: inline-block;
+}
+
+.submit-btn.full-width {
+    width: 100%;
+    margin-top: 0;
+}
+
+.submit-btn:hover:not(:disabled) {
+    background-color: #ea580c;
+}
+
+.submit-btn:active:not(:disabled) {
+    transform: translateY(1px);
+}
+
+.submit-btn:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+    background-color: var(--primary-color);
+}
+
+@media (max-width: 480px) {
+    .card {
+        padding: 1.5rem;
+    }
+}
+
+/* Page Specific Styles */
 /* Footer Link Styles */
 .footer {
     text-align: center;
