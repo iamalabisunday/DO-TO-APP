@@ -7,10 +7,10 @@ window.addEventListener("DOMContentLoaded", () => {
   const userName = JSON.parse(localStorage.getItem("Create Account"));
 
   if (!userName) {
-    welcomeName.textContent = "Welcome";
+    welcomeName.textContent = "First name";
     return false;
   }
 
-  welcomeName.textContent = `${userName[0].name}`;
+  welcomeName.textContent = `${userName[0].name.split("")[0]}`;
   return true;
 });
