@@ -74,5 +74,5 @@ password.addEventListener("input", enableButton);
 form.addEventListener("submit", (e) => {
   e.preventDefault();
 
-  return (window.location.href = "home.html");
+  window.location.href = "home.html";
 });

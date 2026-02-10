@@ -210,7 +210,6 @@ form.addEventListener("submit", (e) => {
 
   // Push to Arry
   createAccount.push(dataSave);
-  console.log(createAccount);
 
   // Save to local storage
   localStorage.setItem("Create Account", JSON.stringify(createAccount));

@@ -1,5 +1,5 @@
 /////////////////////////////////////
-// WELCOME USER
+// WELCOME USER WITH THIER NAME
 /////////////////////////////////////
 window.addEventListener("DOMContentLoaded", () => {
   const welcomeName = document.getElementById("highlight-name");
@@ -65,13 +65,13 @@ function addTask(e) {
 
   if (!title || !desc) return;
 
-  tasks.push({ title, desc, completed: false });
+  tasks.push({ title, desc });
   saveTasks();
 
   newForm.reset();
   disableAddBtn();
   toggleNewTaskModal();
-  renderTasks();
+  printItemsOnUI();
 }
 
 /////////////////////////////////////
@@ -101,46 +101,50 @@ function saveTasks() {
 }
 
 /////////////////////////////////////
-// RENDER TASKS
+// Print Data From Local Storageon the UI
 /////////////////////////////////////
-function renderTasks(list = tasks) {
+
+function printItemsOnUI(taskArray = tasks) {
   taskList.innerHTML = "";
 
-  list.forEach((task) => {
-    const index = tasks.indexOf(task);
-    taskList.append(createTaskItem(task, index));
+  taskArray.forEach((item, index) => {
+    const { title, desc } = item;
+
+    const taskItemDiv = document.createElement("div");
+    taskItemDiv.className = "task-item";
+
+    const taskLeftDiv = document.createElement("div");
+    taskLeftDiv.className = "task-left";
+
+    const markCircleCheck = document.createElement("i");
+    markCircleCheck.classList.add("fa-solid", "fa-circle-check");
+
+    const taskInfoDiv = document.createElement("div");
+    taskInfoDiv.className = "task-info";
+
+    const titleEl = document.createElement("h3");
+    titleEl.textContent = title;
+
+    const descEl = document.createElement("p");
+    descEl.textContent = desc;
+
+    taskInfoDiv.append(titleEl, descEl);
+    taskLeftDiv.append(markCircleCheck, taskInfoDiv);
+
+    const taskActionsDiv = document.createElement("div");
+    taskActionsDiv.className = "task-actions";
+
+    const editIcon = document.createElement("i");
+    editIcon.classList.add("fa-solid", "fa-pen-to-square", "edit-icon");
+
+    const deleteIcon = document.createElement("i");
+    deleteIcon.classList.add("fa-solid", "fa-trash-can", "delete-icon");
+
+    taskActionsDiv.append(editIcon, deleteIcon);
+
+    taskItemDiv.append(taskLeftDiv, taskActionsDiv);
+    taskList.appendChild(taskItemDiv);
   });
-}
-
-/////////////////////////////////////
-// CREATE TASK ITEM
-/////////////////////////////////////
-function createTaskItem(task, index) {
-  const taskItem = document.createElement("div");
-  taskItem.className = "task-item";
-
-  taskItem.innerHTML = `
-    <div class="task-left">
-      <div class="check-circle ${task.completed ? "completed" : ""}">
-        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14"
-          viewBox="0 0 24 24" fill="none" stroke="currentColor"
-          stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-          <polyline points="20 6 9 17 4 12"></polyline>
-        </svg>
-      </div>
-      <div class="task-info">
-        <h3>${task.title}</h3>
-        <p>${task.desc}</p>
-      </div>
-    </div>
-
-    <div class="task-actions">
-      <div class="action-icon edit-icon">✏️</div>
-      <div class="action-icon delete-icon">🗑️</div>
-    </div>
-  `;
-
-  return taskItem;
 }
 
 /////////////////////////////////////
@@ -153,17 +157,17 @@ taskList.addEventListener("click", (e) => {
   const index = [...taskList.children].indexOf(taskItem);
 
   // COMPLETE
-  if (e.target.closest(".check-circle")) {
-    tasks[index].completed = !tasks[index].completed;
-    saveTasks();
-    renderTasks();
-  }
+  // if (e.target.closest(".check-circle")) {
+  //   tasks[index].completed = !tasks[index].completed;
+  //   saveTasks();
+  //   printItemsOnUI();
+  // }
 
   // DELETE
   if (e.target.closest(".delete-icon")) {
     tasks.splice(index, 1);
     saveTasks();
-    renderTasks();
+    printItemsOnUI();
   }
 
   // EDIT
@@ -201,7 +205,7 @@ editForm.addEventListener("submit", (e) => {
 
   saveTasks();
   closeEditModal();
-  renderTasks();
+  printItemsOnUI();
 });
 
 /////////////////////////////////////
@@ -218,10 +222,10 @@ function handleSearch() {
       task.desc.toLowerCase().includes(query),
   );
 
-  renderTasks(filteredTasks);
+  printItemsOnUI(filteredTasks);
 }
 
 /////////////////////////////////////
 // INITIAL LOAD
 /////////////////////////////////////
-renderTasks();
+printItemsOnUI();
