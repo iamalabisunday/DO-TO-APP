@@ -21,10 +21,10 @@ const taskBtn = document.getElementById("taskBtn");
 const newTaskToggle = document.getElementById("new-task-toggle");
 const closeNewTask = document.getElementById("close-new-task");
 
-taskBtn.addEventListener("click", openTaskModal);
-closeNewTask.addEventListener("click", openTaskModal);
+taskBtn.addEventListener("click", openCloseTaskModal);
+closeNewTask.addEventListener("click", openCloseTaskModal);
 
-function openTaskModal() {
+function openCloseTaskModal() {
   if (newTaskToggle.classList.contains("modal-toggle")) {
     newTaskToggle.classList.remove("modal-toggle");
     return false;
@@ -61,10 +61,13 @@ function newTaskValue(e) {
   localStorage.setItem("taskValue", JSON.stringify(newTaskDatas));
 
   form.reset();
-  openTaskModal();
+  openCloseTaskModal();
+  fetchItems();
 }
 
+/////////////////////////////////////
 // Disable Btn
+/////////////////////////////////////
 function disableNewBtn() {
   const title = newTitle.value.trim();
   const desc = newDesc.value.trim();
@@ -76,7 +79,9 @@ function disableNewBtn() {
   }
 }
 
+/////////////////////////////////////
 // Even Listener
+/////////////////////////////////////
 newTitle.addEventListener("input", disableNewBtn);
 newDesc.addEventListener("input", disableNewBtn);
 
@@ -91,6 +96,22 @@ function clearTaskValue(e) {
   e.preventDefault();
   form.reset();
 }
+
+/////////////////////////////////////
+// fetch data from localStage
+/////////////////////////////////////
+function fetchItems() {
+  if (localStorage.getItem("taskValue")) {
+    researchIteams = JSON.parse(localStorage.getItem("taskValue"));
+  }
+}
+
+fetchItems();
+
+//////////////////////////////////////////
+// Print Data from LocalStroge on the UI
+//////////////////////////////////////////
+function printItems() {}
 
 /////////////////////////////////////
 // Edit Task - Open and close New Task Modal
