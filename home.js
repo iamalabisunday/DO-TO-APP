@@ -55,6 +55,8 @@ function toggleNewTaskModal() {
 /////////////////////////////////////
 // ADD TASK
 /////////////////////////////////////
+let toDOTasks = [];
+
 newForm.addEventListener("submit", addTask);
 
 function addTask(e) {
@@ -65,50 +67,40 @@ function addTask(e) {
 
   if (!title || !desc) return;
 
-  tasks.push({ title, desc });
-  saveTasks();
+  const toDOTask = { title, desc };
+
+  toDOTasks.push(toDOTask);
+
+  localStorage.setItem("taskValue", JSON.stringify(toDOTasks));
 
   newForm.reset();
-  disableAddBtn();
   toggleNewTaskModal();
   printItemsOnUI();
 }
 
 /////////////////////////////////////
-// DISABLE ADD BUTTON
+//Fetch data from LS
 /////////////////////////////////////
-function disableAddBtn() {
-  addNewBtn.disabled = !(newTitle.value.trim() && newDesc.value.trim());
+
+function fetchtasks() {
+  if (localStorage.getItem("taskValue")) {
+    toDOTasks = JSON.parse(localStorage.getItem("taskValue"));
+  }
+  printItemsOnUI();
 }
 
-newTitle.addEventListener("input", disableAddBtn);
-newDesc.addEventListener("input", disableAddBtn);
-
-/////////////////////////////////////
-// CANCEL NEW TASK
-/////////////////////////////////////
-cancelNewBtn.addEventListener("click", (e) => {
-  e.preventDefault();
-  newForm.reset();
-  disableAddBtn();
-});
-
-/////////////////////////////////////
-// SAVE TO LOCALSTORAGE
-/////////////////////////////////////
-function saveTasks() {
-  localStorage.setItem("taskValue", JSON.stringify(tasks));
-}
+fetchtasks();
 
 /////////////////////////////////////
 // Print Data From Local Storageon the UI
 /////////////////////////////////////
 
-function printItemsOnUI(taskArray = tasks) {
+function printItemsOnUI() {
   taskList.innerHTML = "";
 
-  taskArray.forEach((item, index) => {
-    const { title, desc } = item;
+  toDOTasks.forEach(function (item) {
+    let title = item.title;
+    let desc = item.desc;
 
     const taskItemDiv = document.createElement("div");
     taskItemDiv.className = "task-item";
@@ -148,6 +140,25 @@ function printItemsOnUI(taskArray = tasks) {
 }
 
 /////////////////////////////////////
+// DISABLE ADD BUTTON
+/////////////////////////////////////
+function disableAddBtn() {
+  addNewBtn.disabled = !(newTitle.value.trim() && newDesc.value.trim());
+}
+
+newTitle.addEventListener("input", disableAddBtn);
+newDesc.addEventListener("input", disableAddBtn);
+
+/////////////////////////////////////
+// CANCEL NEW TASK
+/////////////////////////////////////
+cancelNewBtn.addEventListener("click", (e) => {
+  e.preventDefault();
+  newForm.reset();
+  disableAddBtn();
+});
+
+/////////////////////////////////////
 // TASK ACTIONS (EVENT DELEGATION)
 /////////////////////////////////////
 taskList.addEventListener("click", (e) => {
@@ -158,9 +169,7 @@ taskList.addEventListener("click", (e) => {
 
   // DELETE
   if (e.target.closest(".delete-icon")) {
-    tasks.splice(index, 1);
-    saveTasks();
-    printItemsOnUI();
+    deleteTask(index);
   }
 
   // EDIT
@@ -168,6 +177,21 @@ taskList.addEventListener("click", (e) => {
     openEditModal(index);
   }
 });
+
+/////////////////////////////////////
+// DELETE
+/////////////////////////////////////
+
+function deleteTask(index) {
+  // Remove the task at that index
+  toDOTasks.splice(index, 1);
+
+  // Update localStorage
+  localStorage.setItem("taskValue", JSON.stringify(toDOTasks));
+
+  // Re-render UI
+  fetchtasks();
+}
 
 /////////////////////////////////////
 // EDIT MODAL

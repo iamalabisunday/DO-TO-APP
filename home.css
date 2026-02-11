@@ -151,6 +151,11 @@ body {
   background-color: var(--primary-color);
 }
 
+.fa-xmark {
+  background-color: white;
+  color: white;
+}
+
 @media (max-width: 480px) {
   .card {
     padding: 1.5rem;
