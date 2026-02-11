@@ -156,13 +156,6 @@ taskList.addEventListener("click", (e) => {
 
   const index = [...taskList.children].indexOf(taskItem);
 
-  // COMPLETE
-  // if (e.target.closest(".check-circle")) {
-  //   tasks[index].completed = !tasks[index].completed;
-  //   saveTasks();
-  //   printItemsOnUI();
-  // }
-
   // DELETE
   if (e.target.closest(".delete-icon")) {
     tasks.splice(index, 1);
