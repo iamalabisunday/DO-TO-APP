@@ -151,9 +151,8 @@ body {
   background-color: var(--primary-color);
 }
 
-.fa-xmark {
-  background-color: white;
-  color: white;
+.close-btn .fa-xmark {
+  color: var(--text-secondary);
 }
 
 @media (max-width: 480px) {
@@ -190,13 +189,15 @@ body {
   flex: 1;
 }
 
-.search-icon {
+.search-wrapper .search-icon {
   position: absolute;
   left: 1rem;
   top: 50%;
   transform: translateY(-50%);
   color: var(--text-secondary);
   pointer-events: none;
+  font-size: 1rem;
+  /* Adjust size to match previous SVG size if needed, or keep 1.25rem from fa-solid */
 }
 
 .search-input {
@@ -254,20 +255,35 @@ body {
   padding-bottom: 0;
 }
 
+/* Completed Task Styles */
+.task-item.completed .task-info h3,
+.task-item.completed .task-info p {
+  text-decoration: line-through;
+  opacity: 0.6;
+}
+
+.task-item.completed .fa-circle-check {
+  color: var(--primary-color);
+  /* Ensure it stays colored or change if desired */
+}
+
+
 .task-left {
   display: flex;
   align-items: center;
   gap: 1rem;
 }
 
-.fa-solid {
+.fa-solid,
+.fa-regular {
   font-size: 1.25rem;
   transition: all 0.2s;
   color: var(--primary-color);
   cursor: pointer;
 }
 
-.fa-solid:hover {
+.fa-solid:hover,
+.fa-regular:hover {
   opacity: 0.8;
 }
 

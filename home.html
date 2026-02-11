@@ -1,81 +1,64 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Task Flow</title>
 
-    <link rel="stylesheet" href="home.css" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Task Flow</title>
 
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
-      integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    />
-  </head>
+  <link rel="stylesheet" href="home.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
-  <body>
-    <div class="container task-container">
-      <!-- Main Content -->
-      <div class="task-card">
-        <div class="task-header">
-          <h1>Task Flow</h1>
-          <p>
-            Welcome
-            <span id="highlight-name" class="highlight-text"></span>
-          </p>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+    integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body>
+  <div class="container task-container">
+    <!-- Main Content -->
+    <div class="task-card">
+      <div class="task-header">
+        <h1>Task Flow</h1>
+        <p>
+          Welcome
+          <span id="highlight-name" class="highlight-text"></span>
+        </p>
+      </div>
+
+      <!-- Search and Task button Section -->
+      <div class="action-bar">
+        <div class="search-wrapper">
+          <!-- Search Icon -->
+          <i class="fa-solid fa-magnifying-glass search-icon"></i>
+          <input type="text" placeholder="Search" class="search-input" />
         </div>
+        <button class="btn-primary task-btn" id="taskBtn">Task</button>
+      </div>
 
-        <!-- Search and Task button Section -->
-        <div class="action-bar">
-          <div class="search-wrapper">
-            <!-- Search Icon SVG -->
-            <svg
-              class="search-icon"
-              xmlns="http://www.w3.org/2000/svg"
-              width="20"
-              height="20"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <circle cx="11" cy="11" r="8"></circle>
-              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-            </svg>
-            <input type="text" placeholder="Search" class="search-input" />
-          </div>
-          <button class="btn-primary task-btn" id="taskBtn">Task</button>
-        </div>
-
-        <!-- Task Section -->
-        <div class="task-list">
-          <!-- Task Item -->
-          <!-- <div class="task-item"> -->
-            <!-- <div class="task-left"> -->
-              <!-- MarK complete Task Section -->
-              <!-- <i class="fa-solid fa-circle-check"></i> -->
-              <!-- <i class="fa-regular fa-circle-check"></i> -->
-              <!-- Details Enter Section -->
-              <!-- <div class="task-info">
+      <!-- Task Section -->
+      <div class="task-list">
+        <!-- Task Item -->
+        <!-- <div class="task-item"> -->
+        <!-- <div class="task-left"> -->
+        <!-- MarK complete Task Section -->
+        <!-- <i class="fa-solid fa-circle-check"></i> -->
+        <!-- <i class="fa-regular fa-circle-check"></i> -->
+        <!-- Details Enter Section -->
+        <!-- <div class="task-info">
                 <h3>HTML</h3>
                 <p>Learning and Mastering Html</p>
               </div> -->
-            <!-- </div> -->
-            <!-- Edit and Delete Icon Section -->
-            <!-- <div class="task-actions"> -->
-            <!-- Edit Icon Section -->
-            <!-- <i class="fa-solid fa-pen-to-square"></i> -->
-            <!-- Dalete Icon Section -->
-            <!-- <i class="fa-solid fa-trash-can"></i> -->
-            <!-- </div> -->
-          <!-- </div> -->
+        <!-- </div> -->
+        <!-- Edit and Delete Icon Section -->
+        <!-- <div class="task-actions"> -->
+        <!-- Edit Icon Section -->
+        <!-- <i class="fa-solid fa-pen-to-square"></i> -->
+        <!-- Dalete Icon Section -->
+        <!-- <i class="fa-solid fa-trash-can"></i> -->
+        <!-- </div> -->
+        <!-- </div> -->
         <!-- </div> -->
       </div>
     </div>
@@ -86,49 +69,23 @@
         <div class="modal-header">
           <h2>New Task</h2>
           <label for="new-task-toggle" class="close-btn" id="close-new-task">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <line x1="18" y1="6" x2="6" y2="18"></line>
-              <line x1="6" y1="6" x2="18" y2="18"></line>
-            </svg>
+            <i class="fa-solid fa-xmark"></i>
           </label>
         </div>
         <form id="newForm">
           <div class="form-group">
             <label for="new-title">Title</label>
-            <input
-              type="text"
-              id="new-title"
-              placeholder="What do you need to do?"
-            />
+            <input type="text" id="new-title" placeholder="What do you need to do?" />
           </div>
           <div class="form-group">
             <label for="new-desc">Description</label>
-            <textarea
-              id="new-desc"
-              placeholder="Add more details..."
-              rows="4"
-            ></textarea>
+            <textarea id="new-desc" placeholder="Add more details..." rows="4"></textarea>
           </div>
           <div class="modal-actions">
             <!-- Clear button -->
             <button class="btn-cancel" id="cancelNewBtn">Cancel</button>
             <!-- Submit button -->
-            <button
-              type="submit"
-              class="submit-btn full-width"
-              id="addNewBtn"
-              disabled
-            >
+            <button type="submit" class="submit-btn full-width" id="addNewBtn" disabled>
               Add
             </button>
           </div>
@@ -149,18 +106,12 @@
         <form>
           <div class="form-group">
             <label for="edit-title">Title</label>
-            <input
-              type="text"
-              id="edit-title"
-              placeholder="What do you need to do?"
-              value="Pure CSS"
-            />
+            <input type="text" id="edit-title" placeholder="What do you need to do?" value="Pure CSS" />
           </div>
           <div class="form-group">
             <label for="edit-desc">Description</label>
             <textarea id="edit-desc" placeholder="Add more details..." rows="4">
-Learning and Mastering CSS</textarea
-            >
+Learning and Mastering CSS</textarea>
           </div>
           <div class="modal-actions">
             <button type="submit" class="submit-btn full-width">
@@ -173,5 +124,6 @@ Learning and Mastering CSS</textarea
 
     <!-- JAVASCRIPT -->
     <script src="home.js"></script>
-  </body>
+</body>
+
 </html>

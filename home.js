@@ -39,8 +39,9 @@ const editForm = editTaskModal.querySelector("form");
 /////////////////////////////////////
 // STATE
 /////////////////////////////////////
+// Consolidating state into a single source of truth
 let tasks = JSON.parse(localStorage.getItem("taskValue")) || [];
-let currentEditIndex = null;
+let currentEditId = null; // Changed to ID for better reliability
 
 /////////////////////////////////////
 // NEW TASK MODAL
@@ -55,8 +56,6 @@ function toggleNewTaskModal() {
 /////////////////////////////////////
 // ADD TASK
 /////////////////////////////////////
-let toDOTasks = [];
-
 newForm.addEventListener("submit", addTask);
 
 function addTask(e) {
@@ -67,58 +66,67 @@ function addTask(e) {
 
   if (!title || !desc) return;
 
-  const toDOTask = { title, desc };
+  const newTask = {
+    id: Date.now(), // Unique ID
+    title,
+    desc,
+    completed: false, // Default completion state
+  };
 
-  toDOTasks.push(toDOTask);
-
-  localStorage.setItem("taskValue", JSON.stringify(toDOTasks));
+  tasks.push(newTask);
+  saveAndRender();
 
   newForm.reset();
   toggleNewTaskModal();
-  printItemsOnUI();
+  disableAddBtn();
 }
 
 /////////////////////////////////////
-//Fetch data from LS
+// SAVE & RENDER HELPER
 /////////////////////////////////////
-
-function fetchtasks() {
-  if (localStorage.getItem("taskValue")) {
-    toDOTasks = JSON.parse(localStorage.getItem("taskValue"));
-  }
-  printItemsOnUI();
+function saveAndRender() {
+  localStorage.setItem("taskValue", JSON.stringify(tasks));
+  // Re-run search/filter logic if search input has value, otherwise render all
+  handleSearch();
 }
 
-fetchtasks();
-
 /////////////////////////////////////
-// Print Data From Local Storageon the UI
+// RENDER TASKS
 /////////////////////////////////////
-
-function printItemsOnUI() {
+function renderTasks(tasksToRender = tasks) {
   taskList.innerHTML = "";
 
-  toDOTasks.forEach(function (item) {
-    let title = item.title;
-    let desc = item.desc;
+  if (tasksToRender.length === 0) {
+    // Optional: could add a "No tasks found" message here
+    return;
+  }
 
+  tasksToRender.forEach(function (task) {
     const taskItemDiv = document.createElement("div");
-    taskItemDiv.className = "task-item";
+    taskItemDiv.className = `task-item ${task.completed ? "completed" : ""}`;
+    taskItemDiv.dataset.id = task.id; // Store ID on the element
 
     const taskLeftDiv = document.createElement("div");
     taskLeftDiv.className = "task-left";
 
+    // Mark Complete Icon
     const markCircleCheck = document.createElement("i");
-    markCircleCheck.classList.add("fa-solid", "fa-circle-check");
+    markCircleCheck.classList.add("fa-circle-check", "check-icon");
+    // Toggle solid vs regular based on completion
+    if (task.completed) {
+      markCircleCheck.classList.add("fa-solid");
+    } else {
+      markCircleCheck.classList.add("fa-regular");
+    }
 
     const taskInfoDiv = document.createElement("div");
     taskInfoDiv.className = "task-info";
 
     const titleEl = document.createElement("h3");
-    titleEl.textContent = title;
+    titleEl.textContent = task.title;
 
     const descEl = document.createElement("p");
-    descEl.textContent = desc;
+    descEl.textContent = task.desc;
 
     taskInfoDiv.append(titleEl, descEl);
     taskLeftDiv.append(markCircleCheck, taskInfoDiv);
@@ -156,6 +164,7 @@ cancelNewBtn.addEventListener("click", (e) => {
   e.preventDefault();
   newForm.reset();
   disableAddBtn();
+  toggleNewTaskModal();
 });
 
 /////////////////////////////////////
@@ -165,41 +174,54 @@ taskList.addEventListener("click", (e) => {
   const taskItem = e.target.closest(".task-item");
   if (!taskItem) return;
 
-  const index = [...taskList.children].indexOf(taskItem);
+  const taskId = Number(taskItem.dataset.id);
+  const taskIndex = tasks.findIndex((t) => t.id === taskId);
+
+  if (taskIndex === -1) return;
+
+  // MARK AS COMPLETE (Clicking icon OR text)
+  if (e.target.closest(".check-icon") || e.target.closest(".task-info")) {
+    toggleComplete(taskIndex);
+  }
 
   // DELETE
   if (e.target.closest(".delete-icon")) {
-    deleteTask(index);
+    deleteTask(taskIndex);
   }
 
   // EDIT
   if (e.target.closest(".edit-icon")) {
-    openEditModal(index);
+    openEditModal(taskIndex);
   }
 });
 
 /////////////////////////////////////
+// TOGGLE COMPLETE
+/////////////////////////////////////
+function toggleComplete(index) {
+  tasks[index].completed = !tasks[index].completed;
+  saveAndRender();
+}
+
+/////////////////////////////////////
 // DELETE
 /////////////////////////////////////
-
 function deleteTask(index) {
-  // Remove the task at that index
-  toDOTasks.splice(index, 1);
-
-  // Update localStorage
-  localStorage.setItem("taskValue", JSON.stringify(toDOTasks));
-
-  // Re-render UI
-  fetchtasks();
+  tasks.splice(index, 1);
+  saveAndRender();
 }
 
 /////////////////////////////////////
 // EDIT MODAL
 /////////////////////////////////////
 function openEditModal(index) {
-  currentEditIndex = index;
-  editTitle.value = tasks[index].title;
-  editDesc.value = tasks[index].desc;
+  // We store the ID instead of index for editing to be safe against array mutations
+  const task = tasks[index];
+  currentEditId = task.id;
+
+  editTitle.value = task.title;
+  editDesc.value = task.desc;
+
   editTaskModal.classList.add("modal-toggle");
 }
 
@@ -207,6 +229,7 @@ closeBtn.addEventListener("click", closeEditModal);
 
 function closeEditModal() {
   editTaskModal.classList.remove("modal-toggle");
+  currentEditId = null;
 }
 
 /////////////////////////////////////
@@ -215,14 +238,17 @@ function closeEditModal() {
 editForm.addEventListener("submit", (e) => {
   e.preventDefault();
 
-  if (currentEditIndex === null) return;
+  if (currentEditId === null) return;
 
-  tasks[currentEditIndex].title = editTitle.value.trim();
-  tasks[currentEditIndex].desc = editDesc.value.trim();
+  const taskIndex = tasks.findIndex((t) => t.id === currentEditId);
+  if (taskIndex === -1) return;
 
-  saveTasks();
+  // Update the existing task
+  tasks[taskIndex].title = editTitle.value.trim();
+  tasks[taskIndex].desc = editDesc.value.trim();
+
   closeEditModal();
-  printItemsOnUI();
+  saveAndRender();
 });
 
 /////////////////////////////////////
@@ -233,16 +259,22 @@ searchInput.addEventListener("input", handleSearch);
 function handleSearch() {
   const query = searchInput.value.toLowerCase().trim();
 
+  // If no query, render all tasks
+  if (!query) {
+    renderTasks(tasks);
+    return;
+  }
+
   const filteredTasks = tasks.filter(
     (task) =>
       task.title.toLowerCase().includes(query) ||
       task.desc.toLowerCase().includes(query),
   );
 
-  printItemsOnUI(filteredTasks);
+  renderTasks(filteredTasks);
 }
 
 /////////////////////////////////////
 // INITIAL LOAD
 /////////////////////////////////////
-printItemsOnUI();
+renderTasks();
